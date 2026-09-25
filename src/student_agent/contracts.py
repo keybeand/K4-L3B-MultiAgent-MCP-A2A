@@ -19,7 +19,8 @@ class Contracts:
         self.root = root.resolve()
         schemas: dict[str, dict[str, Any]] = {}
         registry = Registry()
-        for path in sorted(self.root.glob("*.schema.json")):
+        for path in sorted(self.root.rglob("*.schema.json")):
+
             schema = json.loads(path.read_text(encoding="utf-8"))
             schemas[path.name] = schema
             resource = Resource.from_contents(schema)
